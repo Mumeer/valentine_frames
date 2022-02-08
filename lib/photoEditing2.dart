@@ -157,32 +157,37 @@ class _photoEditing2State extends State<photoEditing2> {
           Column(
             children: [
               Expanded(
-                child: InteractiveViewer(
-                  child: Screenshot(
-                      controller: screenshotController,
-                      child:
-                      Stack(children: [
+                child: Screenshot(
+                    controller: screenshotController,
+                    child:
+                    Stack(children: [
 
-                        Center(
+                      
+                      InteractiveViewer(
+                        child: Center(
                           child: Image.file(
                             image!,
                             height: 200,
                             width: 200,
                           ),
                         ),
-
-
-                          (selectedFrame != 0)?
-                            Container(
-                          decoration: BoxDecoration(
-                            image: DecorationImage(
-                              image: AssetImage("assets/valentines_frames/"+selectedFrame.toString()+".png"),
-                              fit: BoxFit.cover,
+                      ),
+                        
+                        (selectedFrame != 0)?
+                          AbsorbPointer(
+                            absorbing: false,
+                            ignoringSemantics: false,
+                            child: AspectRatio(
+                              aspectRatio: 13/14,
+                              child:
+                              Image.asset(
+                                "assets/valentines_frames/"+selectedFrame.toString()+".png",
+                                fit: BoxFit.cover,
+                              )
                             ),
-                          ),
-                            ):Container()
-                        ])),
-                ),
+                          ):Container()
+
+                      ])),
               ),
               createFrameList(),
             ],
